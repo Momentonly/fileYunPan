@@ -1,0 +1,81 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /
+spring:
+  # context id
+  application:
+    name: springbootService
+  #数据源
+  datasource:
+    #数据库驱动
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bjsxt
+    username: root
+    password: 123456
+    #数据库连接池,默认配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid连接池定制化
+    druid:
+      initial-size: 5
+      max-active: 20
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+  # 缓存默认使用SimpleCacheConfiguration配置ConcurrentMapCacheManager，是一个Map集合实现的
+  cache:
+    # 指定缓存ehcache
+    type: ehcache
+    # 指定缓存simple(访问一个缓存名才进行加载一个缓存名至缓存管理器中)
+    #type: simple
+    ehcache:
+      config: classpath:/ehcache.xml
+  #thymeleaf视图解析器
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  #配置文件激活，可以找到对应的application-{profiile}.yml文件
+  profiles:
+    active: test
+  # 静态资源拦截url路径(默认/**,表示所有的访问都经过静态资源路径)
+  #mvc:
+    #static-path-pattern: /**
+  # 静态资源映射路径(资源的具体位置)...(springboot默认还会加上/,是为了解决打war时访问不到问题,表示WebRoot根路径)
+  resources:
+    #static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+    # 配置了该映射路径，则static,resources这些默认的映射路径会被取消,因此需要加上
+    static-locations: classpath:/static/,file:${web.upload.path}
+  aop:
+    # Add @EnableAspectJAutoProxy(与xml中<aop:aspectj-autoproxy />作用相同,使用aop注解时需要)
+    auto: true
+    #默认false，采用JDK动态代理织入增强；如果设为true，则采用CGLIB动态代理织入增强。
+    #不过即使proxyTargetClass设置为false，如果目标类没有声明接口，则Spring将自动使用CGLib动态代理。
+    proxy-target-class: false
+
+# 自定义文件上传路径
+web:
+  upload:
+    path: E:/IDEAWorkSpace/fileYunPan/upfile/
+
+#mybatis
+mybatis:
+  #别名
+  type-aliases-package: com.szxy.pojo
+  #classpath*: 会遍历mappers目录下的所有子目录(所有的目录层)，路径中需要/**/来匹配多级目录
+  #classpath: 只会遍历mappers目录
+  mapper-locations:
+    # *表示多个任意字符, **表示可以表示任意多级目录
+    - classpath:mappers/**/*.xml
+
+# 日志配置
+logging:
+  level:
+    root: info # 默认的root是INFO级别
+    org.mybatis: debug
+    java.sql: debug
+    com.szxy.dao: debug
+    org.springframework.web: trace
+    # 切面日志级别
+    com.szxy.common: info
