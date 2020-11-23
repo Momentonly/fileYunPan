@@ -1,7 +1,11 @@
-package test;
+package test.basic;
+
+import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -43,5 +47,17 @@ public class LocalTimeTest {
             thread2.setName("thread the TWO" + i);
             thread2.start();
         }
+    }
+
+    /**
+     * 格式化日期
+     *      yyyy-MM-dd HH:mm:ss.SSS
+     *      年月日 时分秒 毫秒
+     */
+    @Test
+    public void test(){
+        String time = "2020-10-20 10:20:20.202";
+        LocalDateTime parseExpireTime2 = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        System.out.println(parseExpireTime2);
     }
 }

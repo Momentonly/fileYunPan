@@ -1,4 +1,4 @@
-package com.szxy.common;
+package com.szxy.config.log;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,9 +20,11 @@ import java.util.Arrays;
 /**
  * 声明切面类
  * aop-starter自动配置开启了@EnableAspectJAutoProxy
- * @EnableAspectJAutoProxy 该注解会确保Aspect切面被合理地处理并且被代理被类会被自动创建代理(创建了AnnotationAwareAspectJAutoProxyCreatorAnnotationAwareAspectJAutoProxyCreator类)
+ * @EnableAspectJAutoProxy 该注解会确保Aspect切面被合理地处理并且被代理被类会被自动创建代理
+ *          (创建了AnnotationAwareAspectJAutoProxyCreator类)
  *      关于@Aspect注解如何被扫描：(会扫描所有spring容器中的bean判断是否有@Aspect注解)
- *          AnnotationAwareAspectJAutoProxyCreator中的findCandidateAdvisors()方法中的this.aspectJAdvisorsBuilder.buildAspectJAdvisors()
+ *          AnnotationAwareAspectJAutoProxyCreator中的findCandidateAdvisors()方法中的
+ *          this.aspectJAdvisorsBuilder.buildAspectJAdvisors()
  *          BeanFactoryAspectJAdvisorsBuilder.buildAspectJAdvisors()方法中if (this.advisorFactory.isAspect(beanType))
  *          advisorFactory是AbstractAspectJAdvisorFactory类型
  *          public boolean isAspect(Class<?> clazz) {

@@ -1,4 +1,4 @@
-package test;
+package test.spring;
 
 import com.szxy.controller.UserController;
 import org.junit.Test;

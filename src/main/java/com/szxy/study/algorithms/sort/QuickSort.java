@@ -1,4 +1,4 @@
-package com.szxy.study.algorithms;
+package com.szxy.study.algorithms.sort;
 
 /**
  * 快排
